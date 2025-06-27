@@ -33,33 +33,58 @@ function playRound() {
 
     if (computer.toLowerCase() == "rock") {
         if (human.toLowerCase() == "scissors") {
-            console.log("Computer wins");
+            return "computer";
         } else if (human.toLowerCase() == "paper") {
-            console.log("Human wins");
+            return "human";
         } else {
-            console.log("Draw")
+            return "draw";
         }
     }
 
     if (computer.toLowerCase() == "paper") {
         if (human.toLowerCase() == "rock") {
-            console.log("Computer wins");
+            return "computer";
         } else if (human.toLowerCase() == "scissors") {
-            console.log("Human wins");
+            return "human";
         } else {
-            console.log("Draw")
+            return "draw";
         }
     }
 
     if (computer.toLowerCase() == "scissors") {
         if (human.toLowerCase() == "paper") {
-            console.log("Computer wins");
+            return "computer";
         } else if (human.toLowerCase() == "rock") {
-            console.log("Human wins");
+            return "human";
         } else {
-            console.log("Draw")
+            return "draw";
         }
     }
 }
 
-playRound();
+function playGame() {
+    let computerWins = 0;
+    let humanWins = 0;
+
+    for (let cont = 0; cont < 5; cont++) {
+        let result = playRound();
+        if (result.toLowerCase() == "computer") {
+            computerWins++;
+            console.log("Computer Wins" + " " + "Computer:" + " " + computerWins + " " + "Human:" + " " + humanWins);
+        } else if (result.toLowerCase() == "human") {
+            humanWins++;
+            console.log("Human Wins" + " " + "Computer:" + " " + computerWins + " " + "Human:" + " " + humanWins);
+        } else {
+            console.log("Draw" + " " + "Computer:" + " " + computerWins + " " + "Human:" + " " + humanWins);
+        }
+    }
+
+    if (computerWins > humanWins) {
+        console.log("Coputer win");
+    } else {
+        console.log("Human win");
+    }
+
+}
+
+playGame();
