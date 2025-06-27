@@ -16,14 +16,50 @@ function getComputerChoice() {
             option = "scissors";
             break;
     }
-    console.log(option);
+    return (option);
 }
-
-getComputerChoice();
 
 function getHumanChoice() {
     let choice = prompt("Choose rock, paper, or scissors");
-    console.log(choice);
+    return (choice);
 }
 
-getHumanChoice();
+
+function playRound() {
+    let computer = getComputerChoice();
+    console.log(computer);
+    let human = getHumanChoice();
+    console.log(human);
+
+    if (computer.toLowerCase() == "rock") {
+        if (human.toLowerCase() == "scissors") {
+            console.log("Computer wins");
+        } else if (human.toLowerCase() == "paper") {
+            console.log("Human wins");
+        } else {
+            console.log("Draw")
+        }
+    }
+
+    if (computer.toLowerCase() == "paper") {
+        if (human.toLowerCase() == "rock") {
+            console.log("Computer wins");
+        } else if (human.toLowerCase() == "scissors") {
+            console.log("Human wins");
+        } else {
+            console.log("Draw")
+        }
+    }
+
+    if (computer.toLowerCase() == "scissors") {
+        if (human.toLowerCase() == "paper") {
+            console.log("Computer wins");
+        } else if (human.toLowerCase() == "rock") {
+            console.log("Human wins");
+        } else {
+            console.log("Draw")
+        }
+    }
+}
+
+playRound();
