@@ -19,16 +19,10 @@ function getComputerChoice() {
     return (option);
 }
 
-function getHumanChoice() {
-    let choice = prompt("Choose rock, paper, or scissors");
-    return (choice);
-}
-
-
 function playRound() {
     let computer = getComputerChoice();
     console.log(computer);
-    let human = getHumanChoice();
+    let human = selection;
     console.log(human);
 
     if (computer.toLowerCase() == "rock") {
@@ -87,4 +81,14 @@ function playGame() {
 
 }
 
-playGame();
+// Events
+
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.addEventListener("click", playRound);
+    });
+})
+
+
+
