@@ -1,3 +1,6 @@
+let computerWins = 0;
+let humanWins = 0;
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -19,11 +22,7 @@ function getComputerChoice() {
     return (option);
 }
 
-function playRound() {
-    let computer = getComputerChoice();
-    console.log(computer);
-    let human = selection;
-    console.log(human);
+function playRound(human, computer) {
 
     if (computer.toLowerCase() == "rock") {
         if (human.toLowerCase() == "scissors") {
@@ -56,28 +55,45 @@ function playRound() {
     }
 }
 
-function playGame() {
-    let computerWins = 0;
-    let humanWins = 0;
+function playGame(e) {
 
-    for (let cont = 0; cont < 5; cont++) {
-        let result = playRound();
-        if (result.toLowerCase() == "computer") {
-            computerWins++;
-            console.log("Computer Wins" + " " + "Computer:" + " " + computerWins + " " + "Human:" + " " + humanWins);
-        } else if (result.toLowerCase() == "human") {
-            humanWins++;
-            console.log("Human Wins" + " " + "Computer:" + " " + computerWins + " " + "Human:" + " " + humanWins);
-        } else {
-            console.log("Draw" + " " + "Computer:" + " " + computerWins + " " + "Human:" + " " + humanWins);
-        }
+    let human = e.target.id;
+    let computer = getComputerChoice();
+
+    let result = playRound(human, computer);
+
+    if (humanWins === 5 || computerWins === 5) {
+        return false;
+    }
+    result.toLowerCase() == "computer" ? computerWins++ : humanWins++;
+
+    seeResult(computerWins, humanWins);
+
+    if (computerWins === 5 || humanWins === 5) {
+        showWinner(result);
     }
 
-    if (computerWins > humanWins) {
-        console.log("Coputer win");
+}
+
+function showWinner(result) {
+    const container = document.querySelector("#score");
+    let winner = document.createElement("p");
+    winner.textContent = `The winner is ${result}.`
+    container.appendChild(winner);
+}
+
+function seeResult(computerWins, humanWins) {
+    let points = document.querySelector("#points");
+    if (!points) {
+        const container = document.querySelector("#score");
+        let result = document.createElement("p");
+        result.id = "points";
+        result.textContent = `Computer wins: ${computerWins} Player wins: ${humanWins}`;
+        container.appendChild(result);
     } else {
-        console.log("Human win");
+        points.textContent = `Computer wins: ${computerWins} Player wins: ${humanWins}`
     }
+
 
 }
 
@@ -86,7 +102,9 @@ function playGame() {
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
-        button.addEventListener("click", playRound);
+        button.addEventListener("click", (e) => {
+            playGame(e);
+        })
     });
 })
 
